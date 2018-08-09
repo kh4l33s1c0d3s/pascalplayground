@@ -31,10 +31,10 @@ program VerketteteListe;
 	
 	Feldgroesse := Length(inFeld);{Errechnet Groesse des Feldes}
 	aktuellePosition := ioRefListe;
+	new(aktuellePosition);
 		for i:= 1 to Feldgroesse do
 		{Durchlaeuft Feld von Anfang bis Ende}
 		begin
-			new(aktuellePosition);
 			if (i = 1) then
 			begin
 			anfangsPosition := aktuellePosition
@@ -50,6 +50,7 @@ program VerketteteListe;
 			begin
 				aktuellePosition^.info := inFeld[i];
 				new(aktuellePosition^.next);
+				
 				aktuellePosition := aktuellePosition^.next;
 				{Ordnet dem aktuellen Zeiger den naechsten Wert des einzulesenden Feldes zu. Erzeugt danach neu Position in der Liste und setzt den next Pointer des vorhergehenden Elemnts auf die neu Position}
 			end;
@@ -61,20 +62,19 @@ program VerketteteListe;
 
  
 {Test Prozedure}
-procedure ListeAusgeben(var ioRefListe : tRefListe);
+procedure ListeAusgeben(var inRefListe : tRefListe);
 	var
 	aktuellePosition : tRefListe;
 	
 	
 	begin
-		aktuellePosition := ioRefListe;
+		aktuellePosition := inRefListe;
 		
-		if (ioRefListe <> nil) then
+		if (inRefListe <> nil) then
 		begin
-			writeln('not null');
-			while aktuellePosition^.next <> nil do
+			while aktuellePosition <> nil do
 			begin
-				writeln(aktuellePosition^.info);
+				write('|', aktuellePosition^.info, '| -> ');
 				aktuellePosition := aktuellePosition^.next;
 			end;
 			
@@ -86,45 +86,25 @@ procedure ListeAusgeben(var ioRefListe : tRefListe);
 		end;
 			
 	end;
+	
+function LengthOfLinkedListe(inRefListe : tRefListe) : integer;
+{To-DO diese functoion zuende schreiben und ListeErstellen als function umschreiben}
+var
+	Zaehler : integer;
+begin
+	LengthOfLinkedListe	:= 1337;
+
+	
+end;
 
 {Begin Hauptprogramm}
 begin
 
-ListeErstellen(listWith5, Zeiger);
-ListeAusgeben(Zeiger);
-
-
-{print "LinkedList Play Ground"}
-
-
 writeln('LinkedList Playground');
 
-
-
-
-
-{ Testcases }
-{ Leere Liste }
-
-{var emptyList := erzeugeListe(nil)}
-
-{ Liste mit 5 elementen }
-
-{var 
-list := erzeugeListe([1,2,3,4,5])}
-
-{ Zeigen liste an }
-
-{listeAnzeigen('emptyList', emptyList)
-listeAnzeigen(list)}
-
-{emptyList: -> }
-{list: -> |1| -> |2| -> |3| -> |4| -> |5| -> nil}
-
-
-
-
-
-
+ListeErstellen(listWith5, Zeiger);
+ListeAusgeben(Zeiger);
+writeln();
+writeln('Die Liste hat ', LengthOfLinkedListe(Zeiger), ' Elemente');
 
 end.
