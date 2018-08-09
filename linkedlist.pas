@@ -29,26 +29,26 @@ program VerketteteListe;
 	
 	begin
 	
-	writeln('Liste erstellen wurde aufgerufen');
-	Feldgroesse := Length(inFeld);
-	aktuellePosition := ioRefListe;
-	writeln(Feldgroesse);
+	Feldgroesse := Length(inFeld);{Errechnet Groesse des Feldes}
+	aktuellePosition := ioRefListe;{Setzt Pointer auf den Anfang der Liste}
 	
 		for i:= 1 to Feldgroesse do
+		{Durchlaeuft Feld von Anfang bis Ende}
 		begin
 			new(aktuellePosition);
+			{Erzeugt neues Objekt einer verketteten Liste}
 			if (i = Feldgroesse) then
 			begin
 				aktuellePosition^.info := inFeld[i];
 				aktuellePosition^.next := nil;
-				writeln(aktuellePosition^.info);
+				{Erzeugt letztes Element der Liste und Setzt Zeiger auf nil}
 			end
 			else
 			begin
 				aktuellePosition^.info := inFeld[i];
-				writeln(aktuellePosition^.info);
 				new(aktuellePosition^.next);
 				aktuellePosition := aktuellePosition^.next;
+				{Ordnet dem aktuellen Zeiger den naechsten Wert des einzulesenden Feldes zu. Erzeugt danach neu Position in der Liste und setzt den next Pointer des vorhergehenden Elemnts auf die neu Position}
 			end;
 		end;
 	
