@@ -18,6 +18,8 @@ interface
 function ListeErstellen(inFeld : tFeld) : tRefListe;
 procedure ListeAusgeben(var inRefListe : tRefListe);
 function LengthOfLinkedListe(inRefListe : tRefListe) : integer;
+procedure addElement(inWert : integer; ioListe : tRefListe);
+function ContainsElement(inWert : integer; inRefListe : tRefListe) : boolean;
 
 
 implementation
@@ -107,4 +109,52 @@ begin
 LengthOfLinkedListe := Zaehler;
 		
 end;
+
+procedure addElement(inWert : integer; ioListe : tRefListe);
+var
+aktuellePosition : tRefListe;
+
+
+begin
+
+	aktuellePosition := ioListe;
+	
+	while(aktuellePosition^.next <> nil) do
+	begin
+		aktuellePosition := aktuellePosition^.next;
+		writeln(aktuellePosition^.info);
+	end;
+	new(aktuellePosition^.next);
+	aktuellePosition^.next^.info := inWert;
+	aktuellePosition^.next^.next := nil;
+end;
+
+function ContainsElement(inWert : integer; inRefListe : tRefListe) : boolean;
+var
+aktuellePosition : tRefliste;
+gefunden : boolean;
+begin
+	gefunden := true;
+	aktuellePosition := inRefListe;
+	if (aktuellePosition = nil) then
+	begin
+		gefunden := false;
+		writeln('Ungueltige Eingabe, bitte geben Sie ein nicht leere Liste ein')
+	end;
+	while (aktuellePosition^.next <> nil) do
+	begin
+		if (aktuellePosition^.info = inWert) then
+		begin
+			gefunden := true;
+		end
+		else
+		begin
+			aktuellePosition := aktuellePosition^.next
+		end;
+	end;
+	
+ContainsElement := gefunden;
+
+end;
+
 end.
