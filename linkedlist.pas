@@ -89,12 +89,21 @@ procedure ListeAusgeben(var inRefListe : tRefListe);
 	
 function LengthOfLinkedListe(inRefListe : tRefListe) : integer;
 {To-DO diese functoion zuende schreiben und ListeErstellen als function umschreiben}
+{Extra Credit Hilfsfunktion in eine Unit auslagern -> You need to google that ;)}
 var
 	Zaehler : integer;
 begin
-	LengthOfLinkedListe	:= 1337;
-
+	Zaehler := 0;
+	while (inRefListe <> nil) do
+	begin
+	Zaehler := Zaehler+1;
+	inRefListe := inRefListe^.next;
 	
+	
+	end;
+	
+LengthOfLinkedListe := Zaehler;
+		
 end;
 
 {Begin Hauptprogramm}
