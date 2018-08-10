@@ -10,18 +10,17 @@ uses
  
 
 
-function insertElement(inWert : integer; inPosition: integer; inListe : tRefListe) : tRefListe;
+procedure replaceElement(inWert : integer; inPosition: integer; var ioListe : tRefListe);
 var
 aktuellePosition : tRefListe;
 aktuelleStelle : integer;
-anfangsPosition : tRefListe;
 begin
-	aktuellePosition := inListe;
-	aktuelleStelle := 1;
-	anfangsPosition := inListe;
-	while aktuellePosition <> nil do
+	aktuellePosition := ioListe;
+	aktuelleStelle := 0;
+	while (aktuellePosition^.next <> nil) do
 	begin
-	
+		aktuelleStelle := aktuelleStelle + 1;
+		
 		if (aktuelleStelle = inPosition) and (aktuellePosition^.info = inWert) then
 		begin
 			writeln('An dieser Stelle ist der Wert schon enthalten');
@@ -33,11 +32,8 @@ begin
 		else
 		begin
 			aktuellePosition := aktuellePosition^.next;
-			aktuelleStelle := aktuelleStelle + 1;
 		end;
 	end;
-		
-insertElement := anfangsPosition;
 end;
 	
 
@@ -58,20 +54,12 @@ writeln();
 writeln('Die Liste hat ', LengthOfLinkedListe(Zeiger), ' Elemente');
 
 
-addElement(6,Zeiger);
+replaceElement(2, 2, Zeiger);
 
 ListeAusgeben(Zeiger);
 
-writeln();
 
 writeln('Die Liste hat ', LengthOfLinkedListe(Zeiger), ' Elemente');
-
-
-writeln(ContainsElement(6, Zeiger));
-
-{insertElement(7, 2, Zeiger);
-
-ListeAusgeben(Zeiger);}
 
 
 
@@ -81,5 +69,5 @@ ListeAusgeben(Zeiger);}
 
 {Funktion containselement Zahl uebergeben und nachschauen ob Zahl in Liste X}
 {Funktion/Procedure addElement, Zahl ans Ende der Liste anfuegen}
-{Funktion/Procedure insertElement, Zahl an bestimmter Stelle einfuegen}
+{Funktion/Procedure insertElement, Zahl an bestimmter Stelle einfuegt und alle Zahlen danach ein weiter schiebt}
 end.

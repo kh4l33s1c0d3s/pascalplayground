@@ -20,6 +20,7 @@ procedure ListeAusgeben(var inRefListe : tRefListe);
 function LengthOfLinkedListe(inRefListe : tRefListe) : integer;
 procedure addElement(inWert : integer; ioListe : tRefListe);
 function ContainsElement(inWert : integer; inRefListe : tRefListe) : boolean;
+procedure replaceElement(inWert : integer; inPosition: integer; var ioListe : tRefListe);
 
 
 implementation
@@ -110,6 +111,9 @@ LengthOfLinkedListe := Zaehler;
 		
 end;
 
+
+
+
 procedure addElement(inWert : integer; ioListe : tRefListe);
 var
 aktuellePosition : tRefListe;
@@ -128,6 +132,10 @@ begin
 	aktuellePosition^.next^.info := inWert;
 	aktuellePosition^.next^.next := nil;
 end;
+
+
+
+
 
 function ContainsElement(inWert : integer; inRefListe : tRefListe) : boolean;
 var
@@ -154,6 +162,35 @@ begin
 	end;
 	
 ContainsElement := gefunden;
+
+
+
+
+procedure replaceElement(inWert : integer; inPosition: integer; var ioListe : tRefListe);
+var
+aktuellePosition : tRefListe;
+aktuelleStelle : integer;
+begin
+	aktuellePosition := ioListe;
+	aktuelleStelle := 0;
+	while (aktuellePosition^.next <> nil) do
+	begin
+		aktuelleStelle := aktuelleStelle + 1;
+		
+		if (aktuelleStelle = inPosition) and (aktuellePosition^.info = inWert) then
+		begin
+			writeln('An dieser Stelle ist der Wert schon enthalten');
+		end;
+		if (aktuelleStelle = inPosition) then
+		begin
+			aktuellePosition^.info := inWert;
+		end
+		else
+		begin
+			aktuellePosition := aktuellePosition^.next;
+		end;
+	end;
+end;
 
 end;
 
