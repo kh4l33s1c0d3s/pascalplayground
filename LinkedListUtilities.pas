@@ -66,6 +66,7 @@ function ListeErstellen(inFeld : tFeld) : tRefListe;
 
 
 procedure ListeAusgeben(var inRefListe : tRefListe);
+{Liest verkette Liste ein und gibt sie in Reihenfolge aus} 
 	var
 	aktuellePosition : tRefListe;
 	
@@ -96,7 +97,6 @@ procedure ListeAusgeben(var inRefListe : tRefListe);
 function LengthOfLinkedListe(inRefListe : tRefListe) : integer;
 {Gibt die Laenge einer Liste aus}
 
-{Extra Credit Hilfsfunktion in eine Unit auslagern -> You need to google that ;)}
 var
 	Zaehler : integer;
 begin
@@ -115,6 +115,7 @@ end;
 
 
 procedure addElement(inWert : integer; ioListe : tRefListe);
+{Fuegt Element am Ende einer Liste an}
 var
 aktuellePosition : tRefListe;
 
@@ -138,6 +139,7 @@ end;
 
 
 function ContainsElement(inWert : integer; inRefListe : tRefListe) : boolean;
+{Prueft ob ein Element in einer Lise enthalten ist}
 var
 aktuellePosition : tRefliste;
 gefunden : boolean;
@@ -145,11 +147,13 @@ begin
 	gefunden := true;
 	aktuellePosition := inRefListe;
 	if (aktuellePosition = nil) then
+	{Prueft ob Liste leer ist}
 	begin
 		gefunden := false;
 		writeln('Ungueltige Eingabe, bitte geben Sie ein nicht leere Liste ein')
 	end;
 	while (aktuellePosition^.next <> nil) do
+	{Durchlaeuft Liste bis zu ihrem letzten Element}
 	begin
 		if (aktuellePosition^.info = inWert) then
 		begin
@@ -167,6 +171,7 @@ ContainsElement := gefunden;
 
 
 procedure replaceElement(inWert : integer; inPosition: integer; var ioListe : tRefListe);
+{Ersetzt Element an einer bestimmten Stelle mit einem neuen Elemet}
 var
 aktuellePosition : tRefListe;
 aktuelleStelle : integer;
@@ -174,8 +179,10 @@ begin
 	aktuellePosition := ioListe;
 	aktuelleStelle := 0;
 	while (aktuellePosition^.next <> nil) do
+	{Durchlaeuft Liste bis zum letzten Element}
 	begin
 		aktuelleStelle := aktuelleStelle + 1;
+		{Setzt den Wert aktuelle Stelle einen weiter um Positionen mit integer Werten bestimmen zu koennen}
 		
 		if (aktuelleStelle = inPosition) and (aktuellePosition^.info = inWert) then
 		begin
