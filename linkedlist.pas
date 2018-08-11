@@ -6,7 +6,8 @@ uses
  Zeiger : tRefListe;
  listWith5 : tFeld = (1,2,3,4,5);
  listWith1 : array[1..1] of integer = (1);
-
+ 
+ 
  
 {Begin Hauptprogramm}
 begin
@@ -22,7 +23,7 @@ writeln();
 writeln('Die Liste hat ', LengthOfLinkedListe(Zeiger), ' Elemente');
 
 
-deleteElement(5, Zeiger);
+reverseListe(Zeiger);
 
 ListeAusgeben(Zeiger);
 

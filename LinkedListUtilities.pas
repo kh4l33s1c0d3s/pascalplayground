@@ -23,6 +23,7 @@ function ContainsElement(inWert : integer; inRefListe : tRefListe) : boolean;
 procedure replaceElement(inWert : integer; inPosition: integer; var ioListe : tRefListe);
 procedure insertElement(inWert : integer; inPositio: integer; var ioRefListe : tRefListe);
 procedure deleteElement (inWert : integer; var ioRefListe : tRefListe);
+procedure reverseListe(var ioRefListe : tRefListe);
 
 implementation
 	
@@ -251,6 +252,30 @@ begin
 	Zeiger^.next := Zeiger^.next^.next;
 	dispose(hilfsZeiger);		
 end;
+
+procedure reverseListe(var ioRefListe : tRefListe);
+ var
+ vorZeiger : tRefListe;
+ aktuellerZeiger : tRefListe;
+ nachZeiger : tRefListe;
+ 
+ begin
+	aktuellerZeiger := ioRefListe;
+	nachZeiger := ioRefListe^.next;
+	vorZeiger := nil;
 	
+	while (aktuellerZeiger <> nil) do 
+	begin
+		aktuellerZeiger^.next := vorZeiger;
+		vorZeiger:= aktuellerZeiger;
+		aktuellerZeiger := nachZeiger;
+		
+		if (nachZeiger <> nil) then
+		begin
+			nachZeiger:= nachZeiger^.next;
+		end;
+	end;
+	ioRefListe := vorZeiger;
+end;	
 
 end.
