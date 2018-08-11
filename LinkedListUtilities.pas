@@ -21,6 +21,7 @@ function LengthOfLinkedListe(inRefListe : tRefListe) : integer;
 procedure addElement(inWert : integer; ioListe : tRefListe);
 function ContainsElement(inWert : integer; inRefListe : tRefListe) : boolean;
 procedure replaceElement(inWert : integer; inPosition: integer; var ioListe : tRefListe);
+procedure insertElement(inWert : integer; inPositio: integer; var ioRefListe : tRefListe);
 
 
 implementation
@@ -139,7 +140,6 @@ end;
 
 
 function ContainsElement(inWert : integer; inRefListe : tRefListe) : boolean;
-{Prueft ob ein Element in einer Lise enthalten ist}
 var
 aktuellePosition : tRefliste;
 gefunden : boolean;
@@ -147,13 +147,11 @@ begin
 	gefunden := true;
 	aktuellePosition := inRefListe;
 	if (aktuellePosition = nil) then
-	{Prueft ob Liste leer ist}
 	begin
 		gefunden := false;
 		writeln('Ungueltige Eingabe, bitte geben Sie ein nicht leere Liste ein')
 	end;
 	while (aktuellePosition^.next <> nil) do
-	{Durchlaeuft Liste bis zu ihrem letzten Element}
 	begin
 		if (aktuellePosition^.info = inWert) then
 		begin
@@ -167,11 +165,10 @@ begin
 	
 ContainsElement := gefunden;
 
-
+end;
 
 
 procedure replaceElement(inWert : integer; inPosition: integer; var ioListe : tRefListe);
-{Ersetzt Element an einer bestimmten Stelle mit einem neuen Elemet}
 var
 aktuellePosition : tRefListe;
 aktuelleStelle : integer;
@@ -179,10 +176,8 @@ begin
 	aktuellePosition := ioListe;
 	aktuelleStelle := 0;
 	while (aktuellePosition^.next <> nil) do
-	{Durchlaeuft Liste bis zum letzten Element}
 	begin
 		aktuelleStelle := aktuelleStelle + 1;
-		{Setzt den Wert aktuelle Stelle einen weiter um Positionen mit integer Werten bestimmen zu koennen}
 		
 		if (aktuelleStelle = inPosition) and (aktuellePosition^.info = inWert) then
 		begin
@@ -199,6 +194,36 @@ begin
 	end;
 end;
 
+
+
+
+procedure insertElement(inWert : integer; inPositio: integer; var ioRefListe : tRefListe);
+{Fuegt Wert an bestimmte Stelle in der Liste ein und verschiebt bestehende Positionen entsprechend}
+var
+aktuellePosition : tRefListe;
+hilfsPosition : tRefliste;
+aktuelleStelle : integer;
+begin
+	aktuellePosition := ioRefListe;
+	hilfsPosition := ioRefListe;
+	aktuelleStelle := 0;
+	
+	while (aktuellePosition^.next <> nil) do
+	begin
+		aktuelleStelle := aktuelleStelle + 1;
+		if ((aktuelleStelle +1) = inWert) then
+		begin
+			hilfsPosition := hilfsPosition^.next;
+			new(aktuellePosition^.next);
+			aktuellePosition^.next^.info := inWert;
+			aktuellePosition := aktuellePosition^.next; 
+			aktuellePosition^.next := hilfsPosition;
+		end;
+		aktuellePosition := aktuellePosition^.next;
+		hilfsPosition := hilfsPosition^.next;	
+	end;
 end;
+
+
 
 end.

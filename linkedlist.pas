@@ -7,6 +7,7 @@ uses
  listWith5 : tFeld = (1,2,3,4,5);
  listWith1 : array[1..1] of integer = (1);
  		
+
 	
  
 {Begin Hauptprogramm}
@@ -23,19 +24,12 @@ writeln();
 writeln('Die Liste hat ', LengthOfLinkedListe(Zeiger), ' Elemente');
 
 
-replaceElement(2, 2, Zeiger);
+insertElement(2,4, Zeiger);
+
 
 ListeAusgeben(Zeiger);
 
 
-writeln('Die Liste hat ', LengthOfLinkedListe(Zeiger), ' Elemente');
 
-
-
-
-
-
-
- 
 {Funktion/Procedure insertElement, Zahl an bestimmter Stelle einfuegt und alle Zahlen danach ein weiter schiebt}
 end.
