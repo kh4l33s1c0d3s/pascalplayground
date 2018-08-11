@@ -22,7 +22,7 @@ procedure addElement(inWert : integer; ioListe : tRefListe);
 function ContainsElement(inWert : integer; inRefListe : tRefListe) : boolean;
 procedure replaceElement(inWert : integer; inPosition: integer; var ioListe : tRefListe);
 procedure insertElement(inWert : integer; inPositio: integer; var ioRefListe : tRefListe);
-
+procedure deleteElement (inWert : integer; var ioRefListe : tRefListe);
 
 implementation
 	
@@ -224,6 +224,29 @@ begin
 	end;
 end;
 
-
+procedure deleteElement (inWert : integer; var ioRefListe : tRefListe);
+var 
+hilfsZeiger : tRefListe;
+Zeiger : tRefListe;
+begin
+	hilfsZeiger := ioRefListe;
+	Zeiger := ioRefListe;
+	if (ioRefListe^.info = inWert) then 
+	begin
+		ioRefListe := ioRefListe^.next;
+		dispose(hilfsZeiger);
+	end;
+	
+	while (Zeiger^.next <> nil) and (Zeiger^.next^.info <> inWert) do 
+	begin
+			
+			Zeiger := Zeiger^.next;
+			hilfsZeiger := hilfsZeiger^.next;
+	end;	
+	hilfsZeiger := hilfsZeiger^.next;
+	Zeiger^.next := Zeiger^.next^.next;
+	dispose(hilfsZeiger);		
+end;
+	
 
 end.
