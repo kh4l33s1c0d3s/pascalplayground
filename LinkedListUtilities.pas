@@ -225,24 +225,28 @@ begin
 end;
 
 procedure deleteElement (inWert : integer; var ioRefListe : tRefListe);
+{Loescht Element mit einem bestimmten Wert}
 var 
 hilfsZeiger : tRefListe;
 Zeiger : tRefListe;
 begin
 	hilfsZeiger := ioRefListe;
 	Zeiger := ioRefListe;
-	if (ioRefListe^.info = inWert) then 
+	if (ioRefListe^.info = inWert) then
+	{Prueft ob das erste Elemt das Element ist das geloescht werden soll und loescht dieses}
 	begin
 		ioRefListe := ioRefListe^.next;
 		dispose(hilfsZeiger);
 	end;
 	
-	while (Zeiger^.next <> nil) and (Zeiger^.next^.info <> inWert) do 
+	while (Zeiger^.next <> nil) and (Zeiger^.next^.info <> inWert) do
+	{Geht die Liste so lange durch bis sie am Ende angekommen ist und den Wert noch nicht gefunden hat} 
 	begin
 			
 			Zeiger := Zeiger^.next;
 			hilfsZeiger := hilfsZeiger^.next;
-	end;	
+	end;
+	{Wenn das Element gefunden wurde wird es geloescht und die anderen Zeiger entsprechend umgebogen}	
 	hilfsZeiger := hilfsZeiger^.next;
 	Zeiger^.next := Zeiger^.next^.next;
 	dispose(hilfsZeiger);		

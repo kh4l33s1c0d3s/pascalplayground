@@ -22,11 +22,12 @@ writeln();
 writeln('Die Liste hat ', LengthOfLinkedListe(Zeiger), ' Elemente');
 
 
-deleteElement(3, Zeiger);
+deleteElement(5, Zeiger);
 
 ListeAusgeben(Zeiger);
 
 
 
-{Funktion/Procedure insertElement, Zahl an bestimmter Stelle einfuegt und alle Zahlen danach ein weiter schiebt}
+{reverseElement ---> Listeumdrehen}
+{sortListe ---> Zeiger und boolean Flag, wenn true dann aufsteigend wenn false dann absteigend}
 end.
