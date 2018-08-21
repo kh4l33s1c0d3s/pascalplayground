@@ -4,10 +4,54 @@ uses
  
  var
  Zeiger : tRefListe;
- listWith5 : tFeld = (1,2,3,4,5);
+ listWith5 : tFeld = (1,4,6,4,1);
  listWith1 : array[1..1] of integer = (1);
+ Reihenfolge : boolean;
  
- 
+
+ procedure sortListe(inReihenfolge : boolean; var ioRefListe : tRefListe);
+{Bubble implementieren}
+var
+hauptZeiger : tRefListe;
+nachZeiger : tRefListe;
+position : integer; 
+ZwischenSpeicher : integer;
+begin
+	
+	hauptZeiger := ioRefListe;
+	nachZeiger := ioRefListe^.next;
+	
+	{for position := 0 to (LengthOfLinkedListe(ioRefListe)* LengthOfLinkedListe(ioRefListe))do
+	begin
+	writeln(position);}
+	
+		while (nachZeiger <> nil)do
+		begin
+			if (hauptZeiger^.info > nachZeiger^.info) then
+			{vertauschen der beiden Elemente}
+			begin
+				writeln ('Switch ', hauptZeiger^.info, 'und ',nachZeiger^.info );
+				ZwischenSpeicher := hauptZeiger^.info;
+				hauptZeiger^.info := nachZeiger^.info;
+				nachZeiger^.info := ZwischenSpeicher;
+				nachZeiger := nachZeiger^.next;
+				
+			
+			end
+			else
+			begin
+				nachZeiger := nachZeiger^.next;
+				{writeln('Wert nachZeiger', nachZeiger^.info);}
+		
+			end;
+			writeln();
+			hauptZeiger := hauptZeiger^.next;
+			writeln('Wert nachZeiger', hauptZeiger^.info);
+		end;
+
+	{end;}
+end;
+
  
 {Begin Hauptprogramm}
 begin
@@ -23,12 +67,12 @@ writeln();
 writeln('Die Liste hat ', LengthOfLinkedListe(Zeiger), ' Elemente');
 
 
-reverseListe(Zeiger);
-
-ListeAusgeben(Zeiger);
 
 
+ListeAusgeben(PascalReihe(Zeiger));
 
-{reverseElement ---> Listeumdrehen}
+
+
+
 {sortListe ---> Zeiger und boolean Flag, wenn true dann aufsteigend wenn false dann absteigend}
 end.
