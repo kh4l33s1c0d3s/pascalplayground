@@ -21,34 +21,28 @@ Wert : integer;
 
 Feld : tFeld = (1, 2, 3, 3, 5);
 
-procedure FeldAusgeben(var inFeld);
-var
-i : integer;
+function WertSuchenPosition(inFeld : tFeld; inWert : integer) : integer;
 
+var
+	i : integer; 
+	pos : integer; 
+	
 begin 
 	for i:= 1 to Feldmax do
-	begin
-		writeln(Feld[i]);
+	begin 
+		if inFeld[i] = Wert then
+		begin 
+			pos := i;
+			writeln(pos);
+		end;
 	end;
+WertSuchenPosition := pos;
 end;
 
-procedure WertSuchenErsetzen(inWert:integer; var ioFeld:tFeld);
-var
-i : integer;
-
-begin 
-	for i := 1 to Feldmax do 
-	begin
-		if (Feld[i] = inWert) then 
-		begin
-			Feld[i] := 0;
-		end
-	end;
-end;
 
 
 begin
 Wert := 3;
-WertSuchenErsetzen(Wert, Feld);
+WertSuchenPosition(Feld, Wert);
 FeldAusgeben(Feld);
 end.
