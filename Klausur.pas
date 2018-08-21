@@ -1,5 +1,9 @@
 {Operationen die auf einem Feld ausgefuehrt werden koennen}
+program FeldOperations(input, output);
 
+uses
+
+FeldUtilities;
 
 const
 
@@ -15,28 +19,36 @@ var
 
 Wert : integer;
 
-Feld : tFeld = (1, 2, 3, 4, 5);
+Feld : tFeld = (1, 2, 3, 3, 5);
 
-{Wertsuchen und boolean zurueck geben}
-function Wertsuchen(inWert:integer; inFeld: tFeld): boolean;
-	var
-	i : integer;
-	gefunden : boolean; 
-	
+procedure FeldAusgeben(var inFeld);
+var
+i : integer;
+
+begin 
+	for i:= 1 to Feldmax do
 	begin
-		gefunden := false; 
-		for i := 1 to Feldmax do 
-		begin 
-			if ( inFeld[i] = inWert) then
-			begin
-				gefunden := true;
-			end;
-		
-		end;
-		Wertsuchen := gefunden;
-		writeln(gefunden);
+		writeln(Feld[i]);
 	end;
+end;
+
+procedure WertSuchenErsetzen(inWert:integer; var ioFeld:tFeld);
+var
+i : integer;
+
+begin 
+	for i := 1 to Feldmax do 
+	begin
+		if (Feld[i] = inWert) then 
+		begin
+			Feld[i] := 0;
+		end
+	end;
+end;
+
+
 begin
 Wert := 3;
-Wertsuchen(Wert, Feld);
+WertSuchenErsetzen(Wert, Feld);
+FeldAusgeben(Feld);
 end.

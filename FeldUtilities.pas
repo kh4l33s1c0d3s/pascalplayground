@@ -3,6 +3,7 @@ unit FeldUtilities;
 
 interface
 
+const
 Feldmax = 5;
 
 type
@@ -10,6 +11,13 @@ type
 tIndex = 1..Feldmax; 
 
 tFeld = array [tIndex] of integer;
+
+
+
+function Wertsuchen(inWert:integer; inFeld: tFeld): boolean;
+procedure FeldAusgeben(var inFeld);
+procedure WertSuchenErsetzen(inWert:integer; var ioFeld:tFeld);
+
 
 implementation 
 
@@ -32,3 +40,31 @@ function Wertsuchen(inWert:integer; inFeld: tFeld): boolean;
 		Wertsuchen := gefunden;
 		writeln(gefunden);
 	end;
+	
+procedure FeldAusgeben(var inFeld);
+var
+i : integer;
+
+begin 
+	for i:= 1 to Feldmax do
+	begin
+		writeln(Feld[i]);
+	end;
+end;
+
+
+
+procedure WertSuchenErsetzen(inWert:integer; var ioFeld:tFeld);
+var
+i : integer;
+
+begin 
+	for i := 1 to Feldmax do 
+	begin
+		if (Feld[i] = inWert) then 
+		begin
+			Feld[i] := 0;
+		end
+	end;
+end;
+end.
