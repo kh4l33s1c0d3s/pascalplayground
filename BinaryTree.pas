@@ -2,14 +2,15 @@ program BinaryTree;
 uses BinaryTreeUtilities;
 
 
-var root: tRefNode;
+var 
+root: tRefNode;
    	
 begin {Begin Hauptprogramm}
 
-writeln('BinaryTree Playground');
-writeln('');
+	writeln('BinaryTree Playground');
+	writeln('');
 
-createTree(root);
-printTree(root);
+	createTree(root);
+	printTree(root);
 
 end.

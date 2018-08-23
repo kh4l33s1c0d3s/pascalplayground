@@ -27,8 +27,8 @@ begin
 	ioRefNode^.left^.info := 2;
 	
 	{left left}
-	new(ioRefNode^.left^.left);
-	ioRefNode^.left^.left^.info := 4;
+	{new(ioRefNode^.left^.left);
+	ioRefNode^.left^.left^.info := 4;}
 
 	{left right}
 	new(ioRefNode^.left^.right);

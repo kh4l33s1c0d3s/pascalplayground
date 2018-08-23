@@ -17,7 +17,7 @@ tFeld = array [tIndex] of integer;
 function Wertsuchen(inWert:integer; inFeld: tFeld): boolean;
 procedure FeldAusgeben(var inFeld : tFeld);
 procedure WertSuchenErsetzen(inWert:integer; var ioFeld:tFeld);
-
+function WertSuchenPosition(inFeld : tFeld; inWert : integer) : integer;
 
 implementation 
 
@@ -79,7 +79,7 @@ var
 begin 
 	for i:= 1 to Feldmax do
 	begin 
-		if inFeld[i] = Wert then
+		if inFeld[i] = inWert then
 		begin 
 			pos := i;
 			writeln(pos);
